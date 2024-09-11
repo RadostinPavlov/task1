@@ -14,4 +14,10 @@ public class FilterResponse {
         products = filteredProducts;
         filter = metadata;
     }
+
+    public FilterResponse() {}
+
+    public FilterData getMetadata() {
+        return filter;
+    }
 }

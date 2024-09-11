@@ -3,6 +3,7 @@ package com.example.task1.service;
 import com.example.task1.model.FilterData;
 import com.example.task1.model.FilterResponse;
 import com.example.task1.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -21,6 +22,7 @@ public class ProductService {
 
     private final RepositoryService repositoryService;
 
+    @Autowired
     public ProductService(RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
     }
@@ -72,7 +74,7 @@ public class ProductService {
     }
 
 
-    private List<String> findMostCommonWords(List<Product> products) {
+    List<String> findMostCommonWords(List<Product> products) {
         Map<String, Long> wordCount = new HashMap<>();
         for (Product product : products) {
             String[] words = product.getDescription().toLowerCase().split("\\W+");

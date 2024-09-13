@@ -5,7 +5,6 @@ import com.example.task1.model.FilterResponse;
 import com.example.task1.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -70,6 +69,7 @@ public class ProductService {
         metadata.setMaxPrice(maxPrice);
         metadata.setAvailableSizes(sizes);
         metadata.setCommonWords(commonWords);
+
         return metadata;
     }
 

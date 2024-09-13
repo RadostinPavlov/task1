@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.List;
 
 @Service
 public class RepositoryService {
+
+    private static final String URL = "https://run.mocky.io/v3/7af94347-277c-4d9e-8c4a-02f2c8573871";
+
     private final RestTemplate restTemplate;
 
     @Autowired
@@ -20,8 +22,7 @@ public class RepositoryService {
     }
 
     public List<Product> getProducts() {
-        String url = "https://run.mocky.io/v3/7af94347-277c-4d9e-8c4a-02f2c8573871";
-        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(URL, String.class);
         String json = response.getBody();
 
         ObjectMapper objectMapper = new ObjectMapper();

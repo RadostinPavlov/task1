@@ -3,7 +3,6 @@ package com.example.task1.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
 import java.util.Arrays;
 import java.util.List;
 

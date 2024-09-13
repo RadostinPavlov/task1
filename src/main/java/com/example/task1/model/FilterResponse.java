@@ -1,7 +1,6 @@
 package com.example.task1.model;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data

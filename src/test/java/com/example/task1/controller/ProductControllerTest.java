@@ -9,6 +9,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -90,5 +92,30 @@ public class ProductControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void testFilterProducts_minPriceNegative() throws Exception {
+        mockMvc.perform(get("/filter")
+                        .param("minPrice", "-1"))
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertEquals("Min price must not be negative.", result.getResponse().getContentAsString()));
+    }
+
+    @Test
+    public void testFilterProducts_maxPriceNegative() throws Exception {
+        mockMvc.perform(get("/filter")
+                        .param("maxPrice", "-1"))
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertEquals("Max price must not be negative.", result.getResponse().getContentAsString()));
+    }
+
+    @Test
+    public void testFilterProducts_minPriceGreaterThanMaxPrice() throws Exception {
+        mockMvc.perform(get("/filter")
+                        .param("minPrice", "100")
+                        .param("maxPrice", "50"))
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertEquals("Min price cannot be greater than Max price.", result.getResponse().getContentAsString()));
     }
 }
